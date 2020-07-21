@@ -17,7 +17,6 @@
 		D05DD7AB24BDF6ED006E5154 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D05DD7A924BDF6ED006E5154 /* LaunchScreen.storyboard */; };
 		D05DD7BB24BDFD44006E5154 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = D05DD7BA24BDFD44006E5154 /* Podfile */; };
 		D05DD7BD24BE0302006E5154 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05DD7BC24BE0302006E5154 /* DashboardViewController.swift */; };
-		D05DD7BF24BEADBF006E5154 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05DD7BE24BEADBF006E5154 /* MapViewController.swift */; };
 		D05DD7C124BEBB6A006E5154 /* MapKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05DD7C024BEBB6A006E5154 /* MapKitViewController.swift */; };
 		D05DD7C324BF4FD4006E5154 /* ReportTrashController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05DD7C224BF4FD3006E5154 /* ReportTrashController.swift */; };
 /* End PBXBuildFile section */
@@ -37,7 +36,6 @@
 		D05DD7AC24BDF6ED006E5154 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D05DD7BA24BDFD44006E5154 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		D05DD7BC24BE0302006E5154 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
-		D05DD7BE24BEADBF006E5154 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		D05DD7C024BEBB6A006E5154 /* MapKitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapKitViewController.swift; sourceTree = "<group>"; };
 		D05DD7C224BF4FD3006E5154 /* ReportTrashController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTrashController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -99,7 +97,6 @@
 				D05DD7C024BEBB6A006E5154 /* MapKitViewController.swift */,
 				D05DD7A224BDF6EC006E5154 /* HomeViewController.swift */,
 				D05DD7BC24BE0302006E5154 /* DashboardViewController.swift */,
-				D05DD7BE24BEADBF006E5154 /* MapViewController.swift */,
 				D00486B824C770B300DCAA2E /* GoogleService-Info.plist */,
 				D05DD7A424BDF6EC006E5154 /* Main.storyboard */,
 				D05DD7A724BDF6ED006E5154 /* Assets.xcassets */,
@@ -231,7 +228,6 @@
 				D05DD79F24BDF6EC006E5154 /* AppDelegate.swift in Sources */,
 				D05DD7C324BF4FD4006E5154 /* ReportTrashController.swift in Sources */,
 				D05DD7A124BDF6EC006E5154 /* SceneDelegate.swift in Sources */,
-				D05DD7BF24BEADBF006E5154 /* MapViewController.swift in Sources */,
 				D05DD7BD24BE0302006E5154 /* DashboardViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
