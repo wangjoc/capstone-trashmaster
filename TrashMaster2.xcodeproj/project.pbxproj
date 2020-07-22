@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		59E8B45E6551B5F75636A28B /* libPods-TrashMaster2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0493AFD2220C668A799442D0 /* libPods-TrashMaster2.a */; };
 		D00486B924C770B300DCAA2E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D00486B824C770B300DCAA2E /* GoogleService-Info.plist */; };
+		D00486BD24C793F700DCAA2E /* ReportFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00486BC24C793F700DCAA2E /* ReportFormController.swift */; };
 		D05DD79F24BDF6EC006E5154 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05DD79E24BDF6EC006E5154 /* AppDelegate.swift */; };
 		D05DD7A124BDF6EC006E5154 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05DD7A024BDF6EC006E5154 /* SceneDelegate.swift */; };
 		D05DD7A324BDF6EC006E5154 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05DD7A224BDF6EC006E5154 /* HomeViewController.swift */; };
@@ -26,6 +27,7 @@
 		5B104B9399D32876B45EE6DB /* Pods-TrashMaster2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrashMaster2.release.xcconfig"; path = "Target Support Files/Pods-TrashMaster2/Pods-TrashMaster2.release.xcconfig"; sourceTree = "<group>"; };
 		67C3368F3D474E760E80BD09 /* Pods-TrashMaster2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrashMaster2.debug.xcconfig"; path = "Target Support Files/Pods-TrashMaster2/Pods-TrashMaster2.debug.xcconfig"; sourceTree = "<group>"; };
 		D00486B824C770B300DCAA2E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D00486BC24C793F700DCAA2E /* ReportFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportFormController.swift; sourceTree = "<group>"; };
 		D05DD79B24BDF6EC006E5154 /* TrashMaster2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrashMaster2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D05DD79E24BDF6EC006E5154 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D05DD7A024BDF6EC006E5154 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				D05DD79E24BDF6EC006E5154 /* AppDelegate.swift */,
+				D00486BC24C793F700DCAA2E /* ReportFormController.swift */,
 				D05DD7A024BDF6EC006E5154 /* SceneDelegate.swift */,
 				D05DD7C224BF4FD3006E5154 /* ReportTrashController.swift */,
 				D05DD7C024BEBB6A006E5154 /* MapKitViewController.swift */,
@@ -229,6 +232,7 @@
 				D05DD7C324BF4FD4006E5154 /* ReportTrashController.swift in Sources */,
 				D05DD7A124BDF6EC006E5154 /* SceneDelegate.swift in Sources */,
 				D05DD7BD24BE0302006E5154 /* DashboardViewController.swift in Sources */,
+				D00486BD24C793F700DCAA2E /* ReportFormController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

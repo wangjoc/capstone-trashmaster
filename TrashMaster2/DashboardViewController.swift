@@ -22,7 +22,6 @@ class DashboardViewController: UIViewController {
         self.performSegue(withIdentifier: "ReportTrashSegue", sender: self)
     }
     
-    
     @IBAction func issueButtonTapped(_ sender: UIButton) {
         // This needs to be ran on a device
         showMailComposer()

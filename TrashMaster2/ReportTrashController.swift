@@ -27,13 +27,24 @@ class ReportTrashController: UIViewController {
     var postData = [Dictionary<String, Any>]()
     
     override func viewDidLoad() {
-           super.viewDidLoad()
-           ref = Database.database().reference()
-           checkLocationServices()
-           loadData()
-        
-           print("Trash Reporter has loaded")
-       }
+       super.viewDidLoad()
+       ref = Database.database().reference()
+       checkLocationServices()
+       loadData()
+    
+       print("Trash Reporter has loaded")
+    }
+    
+    // https://www.youtube.com/watch?time_continue=655&v=uKQjJb-KSwU&feature=emb_logo
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is ReportFormController {
+            let destinationCoordinate = getCenterLocation(for: ReportMapView).coordinate
+            
+            var rfc = segue.destination as! ReportFormController
+            rfc.data = ["title":"Trash", "latitude": Double(round(1000000 * destinationCoordinate.latitude)/1000000), "longitude": Double(round(1000000 * destinationCoordinate.longitude)/1000000)]
+            rfc.address = self.addressLabel.text ?? "N/A"
+        }
+    }
     
     func loadData() {
         print("Start load data")
@@ -58,11 +69,6 @@ class ReportTrashController: UIViewController {
             
             ReportMapView.addAnnotation(annotations)
         }
-    }
-    
-    func markLocation() {
-        let destinationCoordinate = getCenterLocation(for: ReportMapView).coordinate
-        ref?.child("trash-location").childByAutoId().setValue(["title":"Trash", "latitude": Double(round(1000000 * destinationCoordinate.latitude)/1000000), "longitude": Double(round(1000000 * destinationCoordinate.longitude)/1000000)])
     }
     
     func setupLocationManager() {
@@ -164,7 +170,8 @@ class ReportTrashController: UIViewController {
     }
     
     @IBAction func markTrash(_ sender: UIButton) {
-        markLocation()
+        print("Go to Report Form")
+        self.performSegue(withIdentifier: "ReportFormSegue", sender: self)
     }
     
     
