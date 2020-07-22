@@ -56,7 +56,6 @@ class ReportTrashController: UIViewController {
             let longitude = (snapshot.value as? NSDictionary)?["longitude"] as? Double ?? 0
             
             self.postData.append(["title": title, "latitude": latitude, "longitude": longitude])
-            print(self.postData)
             self.createAnnotations(locations: self.postData)
         })
     }
