@@ -245,14 +245,6 @@
                                     <outlet property="delegate" destination="NeU-hm-vrz" id="mqt-HQ-ur7"/>
                                 </connections>
                             </mapView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hexagon.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="NU4-mJ-Um8">
-                                <rect key="frame" x="355" y="696.5" width="50" height="50.5"/>
-                                <color key="tintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="3zd-mJ-GKV"/>
-                                    <constraint firstAttribute="width" constant="50" id="Pt6-ly-gMF"/>
-                                </constraints>
-                            </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mappin" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="UyC-Th-UTE">
                                 <rect key="frame" x="187" y="380.5" width="40" height="40"/>
                                 <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -271,18 +263,22 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Yy-jD-Hwv">
-                                <rect key="frame" x="365" y="707" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Yy-jD-Hwv">
+                                <rect key="frame" x="354" y="707.5" width="40" height="40.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Brn-7g-RrR"/>
+                                    <constraint firstAttribute="width" constant="40" id="FQi-bJ-shH"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="GO">
+                                <color key="tintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="GO" backgroundImage="hexagon.fill" catalog="system">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
                                     <action selector="goButtonTapped:" destination="NeU-hm-vrz" eventType="touchUpInside" id="JHb-ph-xjV"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uAg-Gp-4x1">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uAg-Gp-4x1" userLabel="backButton">
                                 <rect key="frame" x="30" y="18.5" width="40" height="39"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="1dL-Dg-A0e"/>
@@ -294,7 +290,7 @@
                                     <action selector="mapToDash:" destination="NeU-hm-vrz" eventType="touchUpInside" id="P01-cj-oPu"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VBD-dR-KNe">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VBD-dR-KNe" userLabel="currentButton">
                                 <rect key="frame" x="20" y="708.5" width="40" height="39"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="If6-UI-TwU"/>
@@ -305,34 +301,54 @@
                                     <action selector="returnToUserLocation:" destination="NeU-hm-vrz" eventType="touchUpInside" id="ihO-L2-XDh"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eT8-5G-ixi">
-                                <rect key="frame" x="359" y="636" width="40" height="40.5"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eT8-5G-ixi" userLabel="addCanButton">
+                                <rect key="frame" x="354" y="657" width="40" height="40.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="e9H-U5-pmU"/>
                                     <constraint firstAttribute="width" constant="40" id="eEV-1R-wnk"/>
                                 </constraints>
-                                <state key="normal" backgroundImage="trash.fill" catalog="system"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="33"/>
+                                <state key="normal" title="+" backgroundImage="trash.fill" catalog="system">
+                                    <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="addTrashCan:" destination="NeU-hm-vrz" eventType="touchUpInside" id="MX5-9S-RkW"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6pc-fe-9d6" userLabel="goButton">
+                                <rect key="frame" x="354" y="602.5" width="40" height="40.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="3nv-0q-Edy"/>
+                                    <constraint firstAttribute="height" constant="40" id="JdB-hR-vgF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
+                                <state key="normal" title="+" backgroundImage="studentdesk" catalog="system">
+                                    <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="addBathroom:" destination="NeU-hm-vrz" eventType="touchUpInside" id="wHN-z2-YzM"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="uAg-Gp-4x1" firstAttribute="top" secondItem="9Qv-LD-0oK" secondAttribute="top" constant="18" id="5I5-fW-CSm"/>
+                            <constraint firstItem="9Qv-LD-0oK" firstAttribute="trailing" secondItem="6pc-fe-9d6" secondAttribute="trailing" constant="20" id="7XW-aF-M00"/>
+                            <constraint firstItem="4Yy-jD-Hwv" firstAttribute="top" secondItem="eT8-5G-ixi" secondAttribute="bottom" constant="10" id="DP5-VV-x4k"/>
                             <constraint firstItem="VBD-dR-KNe" firstAttribute="leading" secondItem="9Qv-LD-0oK" secondAttribute="leading" constant="20" id="GOY-La-m8V"/>
                             <constraint firstItem="9Qv-LD-0oK" firstAttribute="bottom" secondItem="VBD-dR-KNe" secondAttribute="bottom" constant="60" id="GkK-uc-5yH"/>
                             <constraint firstItem="N5K-SJ-kyB" firstAttribute="top" secondItem="LZa-8h-QRW" secondAttribute="top" id="Jaz-5i-tDS"/>
                             <constraint firstItem="UyC-Th-UTE" firstAttribute="centerY" secondItem="LZa-8h-QRW" secondAttribute="centerY" constant="-20" id="K6Z-xb-HNf"/>
+                            <constraint firstItem="9Qv-LD-0oK" firstAttribute="bottom" secondItem="4Yy-jD-Hwv" secondAttribute="bottom" constant="60" id="KMs-xw-izY"/>
                             <constraint firstItem="uAg-Gp-4x1" firstAttribute="leading" secondItem="9Qv-LD-0oK" secondAttribute="leading" constant="30" id="LFV-Iy-quQ"/>
-                            <constraint firstItem="9Qv-LD-0oK" firstAttribute="trailing" secondItem="eT8-5G-ixi" secondAttribute="trailing" constant="15" id="Lim-zJ-ihZ"/>
+                            <constraint firstItem="9Qv-LD-0oK" firstAttribute="trailing" secondItem="eT8-5G-ixi" secondAttribute="trailing" constant="20" id="Lim-zJ-ihZ"/>
                             <constraint firstItem="IVF-om-X9D" firstAttribute="leading" secondItem="LZa-8h-QRW" secondAttribute="leading" id="Rog-Tl-7mx"/>
                             <constraint firstAttribute="trailing" secondItem="N5K-SJ-kyB" secondAttribute="trailing" id="VBz-ez-e6F"/>
-                            <constraint firstItem="NU4-mJ-Um8" firstAttribute="top" secondItem="9Qv-LD-0oK" secondAttribute="top" constant="697" id="aar-dJ-odj"/>
                             <constraint firstItem="IVF-om-X9D" firstAttribute="top" secondItem="LZa-8h-QRW" secondAttribute="top" id="h5Q-Yr-kAg"/>
-                            <constraint firstItem="NU4-mJ-Um8" firstAttribute="leading" secondItem="9Qv-LD-0oK" secondAttribute="leading" constant="355" id="lA1-iu-rg3"/>
+                            <constraint firstItem="eT8-5G-ixi" firstAttribute="top" secondItem="6pc-fe-9d6" secondAttribute="bottom" constant="15" id="joo-nF-y7b"/>
+                            <constraint firstItem="9Qv-LD-0oK" firstAttribute="trailing" secondItem="4Yy-jD-Hwv" secondAttribute="trailing" constant="20" id="oO7-9i-0pu"/>
                             <constraint firstItem="UyC-Th-UTE" firstAttribute="centerX" secondItem="LZa-8h-QRW" secondAttribute="centerX" id="pGL-ns-3zg"/>
-                            <constraint firstItem="NU4-mJ-Um8" firstAttribute="top" secondItem="eT8-5G-ixi" secondAttribute="bottom" constant="20" id="rU5-kO-FeG"/>
                             <constraint firstAttribute="bottom" secondItem="N5K-SJ-kyB" secondAttribute="bottom" id="uGj-nj-Bb9"/>
                             <constraint firstAttribute="trailing" secondItem="IVF-om-X9D" secondAttribute="trailing" id="w9B-sd-Zjj"/>
                             <constraint firstItem="N5K-SJ-kyB" firstAttribute="leading" secondItem="LZa-8h-QRW" secondAttribute="leading" id="xqO-8k-ifx"/>
@@ -584,6 +600,7 @@
         <image name="mappin" catalog="system" width="52" height="64"/>
         <image name="paperplane.fill" catalog="system" width="64" height="60"/>
         <image name="questionmark.circle.fill" catalog="system" width="64" height="60"/>
+        <image name="studentdesk" catalog="system" width="62" height="64"/>
         <image name="trash" catalog="system" width="60" height="64"/>
         <image name="trash.circle.fill" catalog="system" width="64" height="60"/>
         <image name="trash.fill" catalog="system" width="60" height="64"/>

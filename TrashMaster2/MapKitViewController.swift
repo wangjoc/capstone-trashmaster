@@ -54,9 +54,9 @@ class MapKitViewController: UIViewController {
         })
     }
     
-    func addTrashCanData () {
+    func addAnnotation(annotationType: String) {
         let destinationCoordinate = getCenterLocation(for: mapKitView).coordinate
-        ref?.child("trashcan").childByAutoId().setValue(["title":"Trash Can", "latitude": Double(round(1000000 * destinationCoordinate.latitude)/1000000), "longitude": Double(round(1000000 * destinationCoordinate.longitude)/1000000)])
+        ref?.child("trashcan").childByAutoId().setValue(["title": annotationType, "latitude": Double(round(1000000 * destinationCoordinate.latitude)/1000000), "longitude": Double(round(1000000 * destinationCoordinate.longitude)/1000000)])
     }
     
     // annotating locations on map: https://www.youtube.com/watch?v=D9pFZsRdynw
@@ -176,7 +176,11 @@ class MapKitViewController: UIViewController {
     }
     
     @IBAction func addTrashCan(_ sender: UIButton) {
-        addTrashCanData()
+        addAnnotation(annotationType: "Trash Can")
+    }
+    
+    @IBAction func addBathroom(_ sender: UIButton) {
+        addAnnotation(annotationType: "Bathroom")
     }
 }
 
@@ -231,6 +235,7 @@ extension MapKitViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "myAnnotation") as? MKPinAnnotationView
 
+        // https://stackoverflow.com/questions/21918848/mapview-not-showing-location-and-pins
         if annotation.title != "My Location" {
             annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "myAnnotation")
         } else {
