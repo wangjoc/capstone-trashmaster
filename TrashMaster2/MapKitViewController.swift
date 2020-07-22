@@ -13,6 +13,10 @@ import Firebase
 
 // https://www.youtube.com/watch?v=vUvf_dlr6IU (covers user location, directions)
 
+class MyPointAnnotation : MKPointAnnotation {
+    var pinTintColor: UIColor?
+}
+
 class MapKitViewController: UIViewController {
     
     @IBOutlet weak var mapKitView: MKMapView!
@@ -58,9 +62,15 @@ class MapKitViewController: UIViewController {
     // annotating locations on map: https://www.youtube.com/watch?v=D9pFZsRdynw
     func createAnnotations(locations: [[String: Any]]) {
         for location in locations {
-            let annotations = MKPointAnnotation()
+            let annotations = MyPointAnnotation()
             annotations.title = location["title"] as? String
             annotations.coordinate = CLLocationCoordinate2D(latitude: location["latitude"] as! CLLocationDegrees, longitude: location["longitude"] as! CLLocationDegrees)
+            
+            if annotations.title == "Trash Can" {
+                annotations.pinTintColor = .blue
+            } else {
+                annotations.pinTintColor = .purple
+            }
             
             mapKitView.addAnnotation(annotations)
         }
@@ -156,7 +166,6 @@ class MapKitViewController: UIViewController {
         getDirections()
     }
     
-    
     @IBAction func mapToDash(_ sender: UIButton) {
         print("Go to Dashboard")
         self.performSegue(withIdentifier: "MapToDashSegue", sender: self)
@@ -216,5 +225,24 @@ extension MapKitViewController: MKMapViewDelegate {
         renderer.strokeColor = .green
         
         return renderer
+    }
+    
+    // https://stackoverflow.com/questions/41819940/how-to-change-pin-color-in-mapkit-under-the-same-annotationview-swift3
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "myAnnotation") as? MKPinAnnotationView
+
+        if annotation.title != "My Location" {
+            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "myAnnotation")
+        } else {
+            annotationView?.annotation = annotation
+        }
+
+        if let annotation = annotation as? MyPointAnnotation {
+            annotationView?.pinTintColor = annotation.pinTintColor
+            annotationView?.isHighlighted = true
+            annotationView?.canShowCallout = true
+        }
+
+        return annotationView
     }
 }
