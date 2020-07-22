@@ -17,6 +17,7 @@ class ReportTrashController: UIViewController {
     
     @IBOutlet weak var ReportMapView: MKMapView!
     @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet var AllMapView: UIView!
     
     let locationManager = CLLocationManager()
     let regionInMeters: Double = 1000
@@ -26,12 +27,31 @@ class ReportTrashController: UIViewController {
     var databaseHandle:DatabaseHandle?
     var postData = [Dictionary<String, Any>]()
     
+    enum CardState {
+        case expanded
+        case collapsed
+    }
+    
+    var reportDetailController:ReportDetailController!
+    var visualEffectView:UIVisualEffectView!
+    
+    let cardHeight:CGFloat = 600
+    let cardHandleAreaHeight:CGFloat = 65
+    
+    var cardVisible = false
+    var nextState:CardState {
+        return cardVisible ? .collapsed : .expanded
+    }
+    
+    var runningAnimations = [UIViewPropertyAnimator]()
+    var animationProgressWhenInterrupted:CGFloat = 0
+    
     override func viewDidLoad() {
        super.viewDidLoad()
        ref = Database.database().reference()
        checkLocationServices()
        loadData()
-    
+       
        print("Trash Reporter has loaded")
     }
     
@@ -46,16 +66,140 @@ class ReportTrashController: UIViewController {
         }
     }
     
+    // Create card: https://www.youtube.com/watch?v=L-f1KSPKm4I
+    func setupCard(annotation: MKPointAnnotation) {
+        visualEffectView = UIVisualEffectView()
+        visualEffectView.frame = self.view.frame
+        self.view.addSubview(visualEffectView)
+        
+        reportDetailController = ReportDetailController(nibName: "ReportDetailController", bundle:nil)
+        self.addChild(reportDetailController)
+        self.view.addSubview(reportDetailController.view)
+        
+        reportDetailController.view.frame = CGRect(x: 0, y: self.view.frame.height - self.cardHandleAreaHeight, width: self.view.bounds.width, height: cardHeight)
+        reportDetailController.view.clipsToBounds = false
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ReportTrashController.handleCardTap(recognizer:)))
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(ReportTrashController.handleCardPen(recognizer:)))
+        
+        reportDetailController.handleArea.addGestureRecognizer(tapGestureRecognizer)
+        reportDetailController.handleArea.addGestureRecognizer(panGestureRecognizer)
+        
+        reportDetailController.annotationTitle.text = annotation.title
+        reportDetailController.annotationDescription.text = annotation.subtitle
+        
+        animateTransitionIfNeeded(state: nextState, duration: 0.9)
+    }
+    
+    @objc
+    func handleCardTap(recognizer:UITapGestureRecognizer) {
+        switch recognizer.state {
+        case .ended:
+            animateTransitionIfNeeded(state: nextState, duration: 0.9)
+        default:
+            break
+        }
+        print("Card Tapped")
+    }
+    
+    @objc
+    func handleCardPen(recognizer:UIPanGestureRecognizer) {
+        switch recognizer.state {
+        case .began:
+            startInteractiveTransition(state: nextState, duration: 0.9)
+        case .changed:
+            let translation = recognizer.translation(in: self.reportDetailController.handleArea)
+            var fractionComplete = translation.y / cardHeight
+            fractionComplete = cardVisible ? fractionComplete : -fractionComplete
+            updateInteractiveTransition(fractionCompleted: 0)
+        case .ended:
+            continueInteractiveTransition()
+        default:
+            break
+        }
+        print("Card Swiped")
+    }
+    
+    func animateTransitionIfNeeded (state:CardState, duration:TimeInterval) {
+        if runningAnimations.isEmpty {
+            let frameAnimator = UIViewPropertyAnimator(duration: duration, dampingRatio: 1) {
+                switch state {
+                case .expanded:
+                    self.reportDetailController.view.frame.origin.y = self.view.frame.height - self.cardHeight
+                case .collapsed:
+                    self.view.sendSubviewToBack(self.visualEffectView)
+                    self.reportDetailController.view.frame.origin.y = self.view.frame.height
+                }
+            }
+            
+            frameAnimator.addCompletion { _ in
+                self.cardVisible = !self.cardVisible
+                self.runningAnimations.removeAll()
+            }
+            
+            frameAnimator.startAnimation()
+            runningAnimations.append(frameAnimator)
+            
+            let cornerRadiusAnimator = UIViewPropertyAnimator(duration: duration, curve: .linear) {
+                switch state {
+                case .expanded:
+                    self.reportDetailController.view.layer.cornerRadius = 12
+                case .collapsed:
+                    self.reportDetailController.view.layer.cornerRadius = 0
+                }
+            }
+            
+            cornerRadiusAnimator.startAnimation()
+            runningAnimations.append(cornerRadiusAnimator)
+            
+            let blurAnimator = UIViewPropertyAnimator(duration: duration, dampingRatio: 1) {
+                switch state {
+                case .expanded:
+                    self.visualEffectView.effect = UIBlurEffect(style: .dark)
+                case .collapsed:
+                    self.visualEffectView.effect = nil
+                }
+            }
+            
+            blurAnimator.startAnimation()
+            runningAnimations.append(blurAnimator)
+        }
+    }
+    
+    func startInteractiveTransition(state:CardState, duration:TimeInterval) {
+        if runningAnimations.isEmpty {
+            animateTransitionIfNeeded(state: state, duration: duration)
+        }
+        for animator in runningAnimations {
+            animator.pauseAnimation()
+            animationProgressWhenInterrupted = animator.fractionComplete
+        }
+    }
+    
+    func updateInteractiveTransition(fractionCompleted:CGFloat) {
+        for animator in runningAnimations {
+            animator.fractionComplete = fractionCompleted + animationProgressWhenInterrupted
+        }
+    }
+    
+    func continueInteractiveTransition() {
+        for animator in runningAnimations {
+            animator.continueAnimation(withTimingParameters: nil, durationFactor: 0)
+        }
+    }
+    
     func loadData() {
         print("Start load data")
         ref?.child("trash-location").observe(.childAdded, with: { (snapshot) in
             let data = (snapshot.value as? NSDictionary)
             
             let title = (snapshot.value as? NSDictionary)?["title"] as? String ?? ""
+            let description = (snapshot.value as? NSDictionary)?["description"] as? String ?? ""
+            let date = (snapshot.value as? NSDictionary)?["date"] as? String ?? ""
             let latitude = (snapshot.value as? NSDictionary)?["latitude"] as? Double ?? 0
             let longitude = (snapshot.value as? NSDictionary)?["longitude"] as? Double ?? 0
             
-            self.postData.append(["title": title, "latitude": latitude, "longitude": longitude])
+            self.postData.append(["title": title, "description": description, "date": date, "latitude": latitude, "longitude": longitude])
             self.createAnnotations(locations: self.postData)
         })
     }
@@ -64,6 +208,7 @@ class ReportTrashController: UIViewController {
         for location in locations {
             let annotations = MKPointAnnotation()
             annotations.title = location["title"] as? String
+            annotations.subtitle = location["description"] as? String
             annotations.coordinate = CLLocationCoordinate2D(latitude: location["latitude"] as! CLLocationDegrees, longitude: location["longitude"] as! CLLocationDegrees)
             
             ReportMapView.addAnnotation(annotations)
@@ -224,6 +369,12 @@ extension ReportTrashController: MKMapViewDelegate {
         renderer.strokeColor = .green
         
         return renderer
+    }
+    
+    // https://stackoverflow.com/questions/37320485/swift-how-to-get-information-from-a-custom-annotation-on-clicked
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        let annotation = view.annotation
+        setupCard(annotation: annotation as! MKPointAnnotation)
     }
 }
 

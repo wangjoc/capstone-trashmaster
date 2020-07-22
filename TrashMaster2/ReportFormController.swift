@@ -13,7 +13,7 @@ class ReportFormController: UIViewController {
     
     @IBOutlet weak var descriptionField: UITextField!
     @IBOutlet weak var textView: UITextView!
-    
+
     var ref:DatabaseReference?
     var databaseHandle:DatabaseHandle?
     var postData = [Dictionary<String, Any>]()
@@ -58,7 +58,8 @@ class ReportFormController: UIViewController {
         self.performSegue(withIdentifier: "ReportFormtoMapSegue", sender: self)
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    
+        override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         descriptionField.resignFirstResponder()
     }
     
