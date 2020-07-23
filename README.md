@@ -1,9 +1,7 @@
 # Trash Master
 This app was created as a Capstone project for Ada Developer Academy. The purpose of the app is to reduce trash in the environment. 
 
-<img src="/Images/Welcome.png" alt="Welcome" width="250" height="500">
-<img src="/Images/Navigator.png" alt="Navigator" width="250" height="500">
-<img src="/Images/Trash_Report.png" alt="Trash Report" width="250" height="500">
+<img src="/Images/Welcome.png" alt="Welcome" width="250" height="500"><img src="/Images/Navigator.png" alt="Navigator" width="250" height="500"><img src="/Images/Trash_Report.png" alt="Trash Report" width="250" height="500">
 
 
 ## Feature Set
