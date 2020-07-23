@@ -1,7 +1,7 @@
 # Trash Master
 This app was created as a Capstone project for Ada Developer Academy. The purpose of the app is to reduce trash in the environment. 
 
-[insert screenshots]
+![GitHub Logo](/Images/Simulator Screen Shot - iPhone 11 Pro Max - 2020-07-23 at 15.25.53.png?raw=true)
 
 ## Feature Set
 The mission of the app is carried out in two ways: 
