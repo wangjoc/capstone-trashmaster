@@ -3,7 +3,7 @@ This app was created as a Capstone project for Ada Developer Academy. The purpos
 
 ![Welcome](/Images/Welcome.png?raw=true | width=250 height=400)
 ![Navigator](/Images/Navigator.png?raw=true =250x400)
-<img src="/Images/Navigator.png" alt="Welcome" width="250" height="400">
+<img src="/Images/Navigator.png" alt="Welcome" width="250" height="450">
 
 ## Feature Set
 The mission of the app is carried out in two ways: 
