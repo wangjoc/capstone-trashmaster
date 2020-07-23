@@ -26,6 +26,7 @@ class ReportTrashController: UIViewController {
     var ref:DatabaseReference?
     var databaseHandle:DatabaseHandle?
     var postData = [Dictionary<String, Any>]()
+    var annotationData: NSDictionary?
     
     enum CardState {
         case expanded
@@ -66,8 +67,35 @@ class ReportTrashController: UIViewController {
         }
     }
     
+    func getAnnotationInfo(snapshotKey: String) {
+        ref?.child("trash-location").child(snapshotKey).observeSingleEvent(of: .value, with: { (snapshot) in
+            let data = (snapshot.value as? NSDictionary)
+            self.annotationData = data
+        })
+        print("Retrieved Annotation Data")
+    }
+        
+    
     // Create card: https://www.youtube.com/watch?v=L-f1KSPKm4I
     func setupCard(annotation: MKPointAnnotation) {
+        ref?.child("trash-location").child(annotation.subtitle!).observeSingleEvent(of: .value, with: { (snapshot) in
+            let data = (snapshot.value as? NSDictionary)
+            self.annotationData = data
+            
+            // https://stackoverflow.com/questions/39459555/swift-3-how-to-download-profile-image-from-firebase-storage
+            let storage = Storage.storage()
+            var reference: StorageReference!
+            reference = storage.reference(forURL: self.annotationData?["trashImageURL"] as! String)
+            reference.downloadURL { (url, error) in
+                let data = NSData(contentsOf: url!)
+                let image = UIImage(data: data! as Data)
+                self.reportDetailController.annotationImage.image = image
+            }
+            
+            self.reportDetailController.annotationTitle.text = self.annotationData!["title"] as! String
+            self.reportDetailController.annotationDescription.text = self.annotationData!["description"] as! String
+        })
+        
         visualEffectView = UIVisualEffectView()
         visualEffectView.frame = self.view.frame
         self.view.addSubview(visualEffectView)
@@ -84,9 +112,6 @@ class ReportTrashController: UIViewController {
         
         reportDetailController.handleArea.addGestureRecognizer(tapGestureRecognizer)
         reportDetailController.handleArea.addGestureRecognizer(panGestureRecognizer)
-        
-        reportDetailController.annotationTitle.text = annotation.title
-        reportDetailController.annotationDescription.text = annotation.subtitle
         
         animateTransitionIfNeeded(state: nextState, duration: 0.9)
     }
@@ -188,13 +213,14 @@ class ReportTrashController: UIViewController {
         }
     }
     
+    // https://firebase.google.com/docs/database/ios/read-and-write
     func loadData() {
         print("Start load data")
         ref?.child("trash-location").observe(.childAdded, with: { (snapshot) in
             let data = (snapshot.value as? NSDictionary)
-            
             let title = (snapshot.value as? NSDictionary)?["title"] as? String ?? ""
-            let description = (snapshot.value as? NSDictionary)?["description"] as? String ?? ""
+            let description = snapshot.key
+//            let description = (snapshot.value as? NSDictionary)?["description"] as? String ?? ""
             let date = (snapshot.value as? NSDictionary)?["date"] as? String ?? ""
             let latitude = (snapshot.value as? NSDictionary)?["latitude"] as? Double ?? 0
             let longitude = (snapshot.value as? NSDictionary)?["longitude"] as? Double ?? 0

@@ -10,6 +10,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ReportDetailController" customModule="TrashMaster2" customModuleProvider="target">
             <connections>
                 <outlet property="annotationDescription" destination="mb5-Zi-o5b" id="SMe-bs-wS8"/>
+                <outlet property="annotationImage" destination="AkS-QD-IhL" id="YRh-Vh-vqC"/>
                 <outlet property="annotationTitle" destination="Ihr-7y-vxw" id="mcE-v4-OKt"/>
                 <outlet property="handleArea" destination="UFI-TY-rZl" id="5qr-dG-qoo"/>
                 <outlet property="view" destination="iN0-l3-epB" id="PeK-JW-e0H"/>

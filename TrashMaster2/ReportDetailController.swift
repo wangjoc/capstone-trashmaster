@@ -14,4 +14,5 @@ class ReportDetailController: UIViewController {
     @IBOutlet weak var annotationTitle: UILabel!
     @IBOutlet weak var annotationDescription: UITextView!
     
+    @IBOutlet weak var annotationImage: UIImageView!
 }
