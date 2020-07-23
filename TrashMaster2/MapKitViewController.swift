@@ -69,7 +69,7 @@ class MapKitViewController: UIViewController {
             if annotations.title == "Trash Can" {
                 annotations.pinTintColor = .blue
             } else {
-                annotations.pinTintColor = .purple
+                annotations.pinTintColor = .red
             }
             
             mapKitView.addAnnotation(annotations)
