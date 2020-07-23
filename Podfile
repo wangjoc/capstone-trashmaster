@@ -4,5 +4,6 @@ target 'TrashMaster2' do
   pod 'GooglePlaces'
   pod 'Firebase/Core'
   pod 'Firebase/Database'
+  pod 'Firebase/Storage'
 end
 
