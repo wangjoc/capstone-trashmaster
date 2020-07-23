@@ -2,6 +2,7 @@
 This app was created as a Capstone project for Ada Developer Academy. The purpose of the app is to reduce trash in the environment. 
 
 ![Welcome](/Images/Welcome.png?raw=true)
+![Navigator](/Images/Navigator.png?raw=true)
 
 ## Feature Set
 The mission of the app is carried out in two ways: 
